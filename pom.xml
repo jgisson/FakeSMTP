@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -14,6 +15,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
+		<java.version>21</java.version>
 		<docker.image>fakesmtp</docker.image>
 	</properties>
 
@@ -27,9 +29,9 @@
 
 		<!-- SubEtha SMTP: easy-to-use server-side SMTP library for Java -->
 		<dependency>
-		    <groupId>org.subethamail</groupId>
-		    <artifactId>subethasmtp</artifactId>
-		    <version>3.1.7</version>
+			<groupId>org.subethamail</groupId>
+			<artifactId>subethasmtp</artifactId>
+			<version>3.1.7</version>
 		</dependency>
 
 		<!-- Logging: slf4j + logback -->
@@ -46,23 +48,23 @@
 
 		<!-- Commons IO: utilities to assist with developing IO functionality -->
 		<dependency>
-		    <groupId>commons-io</groupId>
-		    <artifactId>commons-io</artifactId>
-		    <version>2.4</version>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
 		</dependency>
 
 		<!-- Commons CLI: API for presenting, processing and validating a command line interface -->
 		<dependency>
-		    <groupId>commons-cli</groupId>
-		    <artifactId>commons-cli</artifactId>
-		    <version>1.2</version>
+			<groupId>commons-cli</groupId>
+			<artifactId>commons-cli</artifactId>
+			<version>1.2</version>
 		</dependency>
 
 		<!-- Apple java extensions (to use a custom icon in the Mac Dock) -->
 		<dependency>
-		    <groupId>com.apple</groupId>
-		    <artifactId>AppleJavaExtensions</artifactId>
-		    <version>1.4</version>
+			<groupId>com.apple</groupId>
+			<artifactId>AppleJavaExtensions</artifactId>
+			<version>1.4</version>
 		</dependency>
 
 		<!-- Integration test -->
@@ -73,10 +75,10 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-email</artifactId>
-		    <version>1.3.3</version>
-		    <scope>test</scope>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.3.3</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -84,14 +86,14 @@
 		<finalName>fakeSMTP-${project.version}</finalName>
 
 		<plugins>
-			<!-- Use JDK 1.6 -->
+			<!-- Use JDK 21 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.3</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 
@@ -134,7 +136,7 @@
 				<executions>
 					<execution>
 						<goals>
-							<goal>attached</goal>
+							<goal>single</goal>
 						</goals>
 						<phase>package</phase>
 					</execution>
@@ -218,7 +220,8 @@
 							<configuration>
 								<linkXref>true</linkXref>
 								<sourceEncoding>UTF-8</sourceEncoding>
-								<configLocation>${project.basedir}/src/main/config/checkstyle/custom_checks.xml</configLocation>
+								<configLocation>
+									${project.basedir}/src/main/config/checkstyle/custom_checks.xml</configLocation>
 							</configuration>
 						</plugin>
 
@@ -236,7 +239,8 @@
 							<version>2.0</version>
 						</plugin>
 
-						<!-- Generates a report on various tags found in the code, like @todo, TODO, @fixme, //FIXME tags. -->
+						<!-- Generates a report on various tags found in the code, like @todo, TODO,
+						@fixme, //FIXME tags. -->
 						<plugin>
 							<groupId>org.codehaus.mojo</groupId>
 							<artifactId>taglist-maven-plugin</artifactId>

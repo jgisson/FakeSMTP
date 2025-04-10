@@ -1,8 +1,8 @@
-FROM java:8
+FROM eclipse-temurin:21-jre-ubi9-minimal
 
 RUN mkdir -p /output
 
-ADD fakeSMTP-2.1-SNAPSHOT.jar /fakeSMTP.jar
+COPY fakeSMTP-2.1-SNAPSHOT.jar /fakeSMTP.jar
 
 VOLUME /output
 

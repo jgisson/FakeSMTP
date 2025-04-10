@@ -1,13 +1,11 @@
-FROM java:8
+FROM eclipse-temurin:21-jre-ubi9-minimal
 
 RUN mkdir -p /output
 
-ADD http://nilhcem.github.io/FakeSMTP/downloads/fakeSMTP-latest.zip /fakeSMTP-latest.zip
-
-RUN unzip /fakeSMTP-latest.zip
+COPY target/fakeSMTP-2.1-SNAPSHOT.jar /fakeSMTP.jar
 
 VOLUME /output
 
 EXPOSE 25
 
-ENTRYPOINT ["java","-jar","/fakeSMTP-2.0.jar","--background", "--output-dir", "/output", "--port", "25", "--start-server"]
+ENTRYPOINT ["java","-jar","/fakeSMTP.jar","--background", "--output-dir", "/output", "--port", "25", "--start-server"]
